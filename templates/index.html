@@ -152,8 +152,11 @@
         <img src="./cyberseguridad.jpg" alt="Ciberseguridad">
         <div id="comentarios">
             <!-- Los comentarios se agregarán aquí dinámicamente -->
+            {% for comentario in comentarios %}
+                <div class="alert">{{ comentario }}</div>
+            {% endfor %}
         </div>
-        <form id="formComentario" method="post" action="/agregar">
+        <form id="formComentario" method="post">
             <textarea class="form-control" id="nuevoComentario" name="comentario" placeholder="Agrega tu comentario aquí..."></textarea>
             <div class="button-container">
                 <button type="submit"><i class="fas fa-comment-dots"></i>Agregar Comentario</button>
@@ -177,13 +180,13 @@
             const response = await fetch('/agregar', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: formData
             });
 
             if (response.ok) {
-                window.location.reload(); // Recargar la página para mostrar el nuevo comentario
+                window.location.reload();  // Recargar la página para mostrar el nuevo comentario
             } else {
                 alert('Error al agregar el comentario');
             }
