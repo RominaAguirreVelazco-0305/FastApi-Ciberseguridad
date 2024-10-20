@@ -153,40 +153,42 @@
         <div id="comentarios">
             <!-- Los comentarios se agregarán aquí dinámicamente -->
         </div>
-        <form id="formComentario">
-            <textarea class="form-control" id="nuevoComentario" placeholder="Agrega tu comentario aquí..."></textarea>
+        <form id="formComentario" method="post" action="/agregar">
+            <textarea class="form-control" id="nuevoComentario" name="comentario" placeholder="Agrega tu comentario aquí..."></textarea>
             <div class="button-container">
-                <button type="button" onclick="agregarComentario()"><i class="fas fa-comment-dots"></i>Agregar Comentario</button>
+                <button type="submit"><i class="fas fa-comment-dots"></i>Agregar Comentario</button>
                 <button type="button" onclick="mostrarComentariosJSON()"><i class="fas fa-file-code"></i>Ver Comentarios JSON</button>
             </div>
             <pre id="jsonOutput"></pre>
         </form>
     </div>
     <script>
-        async function agregarComentario() {
+        document.getElementById('formComentario').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Evitar recargar la página
             const comentario = document.getElementById('nuevoComentario').value;
             if (comentario.trim() === '') {
                 alert('Por favor, ingresa un comentario antes de agregar.');
                 return;
             }
+
+            const formData = new URLSearchParams();
+            formData.append('comentario', comentario);
+
             const response = await fetch('/agregar', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: JSON.stringify({comentario: comentario})
+                body: formData
             });
-            const data = await response.json();
-            const comentariosContainer = document.getElementById('comentarios');
-            comentariosContainer.innerHTML = '';
-            data.comentarios.forEach(com => {
-                const div = document.createElement('div');
-                div.className = 'alert';
-                div.textContent = com;
-                comentariosContainer.appendChild(div);
-            });
-            document.getElementById('nuevoComentario').value = '';
-        }
+
+            if (response.ok) {
+                window.location.reload(); // Recargar la página para mostrar el nuevo comentario
+            } else {
+                alert('Error al agregar el comentario');
+            }
+        });
+
         async function mostrarComentariosJSON() {
             const response = await fetch('/comentarios-json');
             const data = await response.json();
