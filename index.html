@@ -1,44 +1,39 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Ciberseguridad Comentarios</title>
     <link href="../style.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-    <img src="./cyberseguridad.jpg" alt="Ciberseguridad">
-     <link rel="icon" type="image/jpg" href="./hacker.jpg">
+    <link rel="icon" type="image/jpg" href="./hacker.jpg">
 
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom right,#1a2a6c,#e77828,#9babef #b21f1f, #ed3a9d, #28e7da); /* Fondo con degradado ajustado para un diseño más acorde */
-            color: #fff; /* Texto blanco para mejor contraste */
+            background: linear-gradient(to bottom right,#1a2a6c,#e77828,#9babef #b21f1f, #ed3a9d, #28e7da);
+            color: #fff;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
-
         .container {
             width: 90%;
             max-width: 800px;
             margin: 40px auto;
             padding: 20px;
-            background: rgba(30, 30, 30, 0.9); /* Fondo con transparencia para que se vea el degradado */
+            background: rgba(30, 30, 30, 0.9);
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
             text-align: center;
             position: relative;
             z-index: 2;
         }
-
         h1 {
-            color: #ea2828; /* Color dorado para el título */
+            color: #ea2828;
             font-weight: bold;
             margin-bottom: 20px;
             font-size: 2.5rem;
         }
-
         img {
             width: 100%;
             height: auto;
@@ -46,7 +41,6 @@
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
-
         #comentarios {
             margin-bottom: 20px;
             max-height: 300px;
@@ -57,7 +51,6 @@
             background: #333;
             box-sizing: border-box;
         }
-
         textarea {
             width: calc(100% - 30px);
             padding: 15px;
@@ -69,9 +62,8 @@
             font-size: 1rem;
             resize: vertical;
             box-sizing: border-box;
-            outline: none; /* Elimina el borde adicional al enfocarse */
+            outline: none;
         }
-
         .button-container {
             display: flex;
             flex-wrap: wrap;
@@ -79,7 +71,6 @@
             margin-top: 15px;
             justify-content: center;
         }
-
         button {
             background-color: #ef0c0c;
             color: #1a1a1a;
@@ -93,20 +84,16 @@
             position: relative;
             overflow: hidden;
         }
-
         button:hover {
             background-color: #e5a623;
             transform: translateY(-3px);
         }
-
         button:active {
             transform: scale(0.95);
         }
-
         button i {
             margin-right: 8px;
         }
-
         button::after {
             content: '';
             position: absolute;
@@ -117,11 +104,9 @@
             background: rgba(255, 255, 255, 0.2);
             transition: left 0.5s;
         }
-
         button:hover::after {
             left: 100%;
         }
-
         .alert {
             padding: 15px;
             background-color: #505050;
@@ -132,19 +117,16 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
             box-sizing: border-box;
         }
-
         #jsonOutput {
             background: #444;
             padding: 15px;
             width: calc(100% - 30px);
             overflow: auto;
-            height: 200px; /* Altura fija con scroll */
-            margin-top: 20px;
-            white-space: pre-wrap; /* Respeta los espacios y saltos de línea en el JSON */
+            height: 200px;
+            white-space: pre-wrap;
             border-radius: 10px;
             box-sizing: border-box;
         }
-
         .animated-background {
             position: fixed;
             top: 0;
@@ -154,9 +136,8 @@
             z-index: -1;
             background: linear-gradient(-45deg, #1a2a6c, #d82727, #4fd7d5, #fdbb2d);
             background-size: 400% 400%;
-            animation: gradientBackground 7.5s ease infinite; /* Aumenta la velocidad de cambio de colores */
+            animation: gradientBackground 7.5s ease infinite;
         }
-
         @keyframes gradientBackground {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -168,7 +149,7 @@
     <div class="animated-background"></div>
     <div class="container">
         <h1>¿Qué Opinas Sobre Ciberseguridad?</h1>
-        <img src="../cyberseguridad.jpg" alt="cyberseguridad">
+        <img src="./cyberseguridad.jpg" alt="Ciberseguridad">
         <div id="comentarios">
             <!-- Los comentarios se agregarán aquí dinámicamente -->
         </div>
@@ -181,7 +162,6 @@
             <pre id="jsonOutput"></pre>
         </form>
     </div>
-
     <script>
         async function agregarComentario() {
             const comentario = document.getElementById('nuevoComentario').value;
@@ -207,7 +187,6 @@
             });
             document.getElementById('nuevoComentario').value = '';
         }
-
         async function mostrarComentariosJSON() {
             const response = await fetch('/comentarios-json');
             const data = await response.json();
