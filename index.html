@@ -156,8 +156,8 @@
                 <div class="alert">{{ comentario }}</div>
             {% endfor %}
         </div>
-        <form id="formComentario" method="post">
-            <textarea class="form-control" id="nuevoComentario" name="comentario" placeholder="Agrega tu comentario aquí..."></textarea>
+        <form id="formComentario" method="post" action="/agregar">
+            <textarea class="form-control" id="nuevoComentario" name="comentario" placeholder="Agrega tu comentario aquí..." required></textarea>
             <div class="button-container">
                 <button type="submit"><i class="fas fa-comment-dots"></i>Agregar Comentario</button>
                 <button type="button" onclick="mostrarComentariosJSON()"><i class="fas fa-file-code"></i>Ver Comentarios JSON</button>
