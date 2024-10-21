@@ -45,7 +45,17 @@ async def agregar_comentario(comentario: str = Form(...)):
     # Redirige al usuario de vuelta a la página principal tras agregar un comentario
     return RedirectResponse(url="/", status_code=303)
 
-# Nuevo endpoint para devolver los comentarios en formato JSON
+# Endpoint para agregar comentarios con JSON
+@app.post("/agregar-json")
+async def agregar_comentario_json(comentario: Comentario):
+    if not comentario.comentario.strip():
+        raise HTTPException(status_code=400, detail="El comentario no puede estar vacío")
+    
+    comentarios.append(comentario.comentario)
+    return {"comentarios": comentarios}
+
+# Endpoint para devolver los comentarios en formato JSON
 @app.get("/comentarios-json")
 async def comentarios_json():
     return {"comentarios": comentarios}
+
